@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>可视化采集平台</title>
+    <link href="{{ static_url('lib/bootstrap-3.3.7/css/bootstrap.css') }}" rel="stylesheet">
+    <link href="{{ static_url('css/bootstrap-treeview.min.css')}}" rel="stylesheet">
+    <link href="{{ static_url('favicon.ico') }}" type="image/x-icon" rel="shortcut icon" >
+    <link href="{{ static_url('css/base.css') }}" rel="stylesheet">
+    <link href="{{ static_url('css/base.css') }}" rel="stylesheet">
+    <link href="{{ static_url('css/bootstrap-table.min.css') }}" rel="stylesheet">
+    <script src="{{ static_url('lib/jquery-2.1.4.min.js') }}"></script>
+    <script src="{{ static_url('lib/bootstrap-3.3.7/js/bootstrap.js') }}"></script>
+    <script src="{{ static_url('lib/bootstrap-treeview.min.js')}}"></script>
+    <script src="{{ static_url('lib/bootstrap-table.min.js') }}"></script>
+    <script src="{{ static_url('lib/bootstrap-table-zh-CN.min.js') }}"></script>
+    <script src="{{ static_url('lib/tableExport.js') }}"></script>
+    <script src="{{ static_url('lib/bootstrap-table-export.min.js') }}"></script>
+    <script src="{{ static_url('lib/bootstrap-table-treegrid.js') }}"></script>
+    <script src="{{ static_url('js/read.js') }}"></script>
+</head>
+<body>
+    {% include "base.html" %}
+    <div class="container-fluid">
+		<div class="row">
+			<div class="col-xs-2">
+				<div id="config_tree"></div>
+			</div>
+			<div class="col-xs-8">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a data-toggle="collapse" href="#collapseOne">
+                                请求配置
+                            </a>
+                        </h4>
+                    </div>
+                    <div id="collapseOne" class="panel-collapse collapse in">
+                        <div class="panel-body" id="config_form">
+                        </div>
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a data-toggle="collapse" href="#collapseTwo">
+                                选择器配置
+                            </a>
+                        </h4>
+                    </div>
+                    <div id="collapseTwo" class="panel-collapse collapse in">
+                        <div class="panel-body">
+                            <table id="collection_data"></table>
+                        </div>
+                    </div>
+                </div>
+                <div id="button-group">
+                    <button type="button" class="btn btn-primary btn-sm" id="start-task">开始任务</button>
+                    <button type="button" class="btn btn-primary btn-sm" id="delete-task">删除配置</button>
+                </div>
+                <div class="alert alert-success hide scraping-in-progress" role="alert">
+                    任务开始成功.
+                </div>
+			</div>
+		</div>
+    </div>
+    <script>
+        var tree = {% raw result %};
+        $('#config_tree').treeview({
+			data: tree,
+			showTags: true,
+			showBorder: false,
+            color: "#428bca",
+			onNodeSelected: function(event, node) {
+			    initColumns(node.text);
+            }
+		});
+    </script>
+</body>
+</html>

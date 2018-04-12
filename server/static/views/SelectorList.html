@@ -1,0 +1,21 @@
+<div id="selector-tree">
+	<ol class="breadcrumb">
+		{{#parentSelectors}}
+		<li><a>{{id}}</a></li>
+		{{/parentSelectors}}
+	</ol>
+	<table class="table table-bordered table-condensed table-hover">
+		<thead>
+		<tr>
+			<th>名称</th>
+			<th>选择器</th>
+			<th>类型</th>
+			<th>是否列表</th>
+			<th>父选择器</th>
+			<th>选项</th>
+		</tr>
+		</thead>
+		<tbody></tbody>
+	</table>
+	<button action="add-selector" type="button" class="btn btn-primary btn-xs">添加新选择器</button>
+</div>

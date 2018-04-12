@@ -1,0 +1,37 @@
+{
+  "name": "arachnado",
+  "version": "1.0.0",
+  "description": "React+Reflux =========",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack --optimize-minimize",
+    "watch": "webpack --progress --color --watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TeamHG-Memex/arachnado.git"
+  },
+  "author": "Mikhail Korobov <kmike84@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/TeamHG-Memex/arachnado/issues"
+  },
+  "homepage": "https://github.com/TeamHG-Memex/arachnado#readme",
+  "devDependencies": {
+    "babel-core": "^5.5.8",
+    "babel-loader": "^5.1.4",
+    "node-libs-browser": "^0.5.2",
+    "webpack": "^1.9.11"
+  },
+  "dependencies": {
+    "debounce": "^1.0.0",
+    "eventemitter3": "^1.1.1",
+    "filesize": "^3.1.2",
+    "pretty-ms": "^1.2.0",
+    "react": "^0.13.3",
+    "react-bootstrap": "^0.23.4",
+    "react-router": "^0.13.3",
+    "reflux": "^0.2.8"
+  }
+}

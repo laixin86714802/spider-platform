@@ -1,0 +1,13 @@
+.start-sel {
+    background-color: #CCF7BE;
+    outline-color: #008000;
+    outline-style: solid;
+    outline-width: 2px;
+}
+
+.end-sel {
+    background-color: #F7CCBE;
+    outline-color: #C70000;
+    outline-style: solid;
+    outline-width: 2px;
+}

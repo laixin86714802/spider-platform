@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>可视化采集平台</title>
+    <link rel="stylesheet" href="/static/lib/bootstrap-3.3.7/css/bootstrap.css?v=7e05f05c7a7471367f1ce441eb2a7e65">
+    <link rel="stylesheet" href="/static/lib/jquery.bootstrapvalidator/bootstrapValidator.css?v=36d768f1d41ece463efa6c980a1943ef">
+    <link rel="stylesheet" href="/static/css/content_script.css?v=6a263ce6308d33afb0ce3aa48db65c03">
+    <link href="/static/favicon.ico?v=0914c70810cc0be6f370651104d73aa8" type="image/x-icon" rel="shortcut icon">
+    <script src="/static/lib/jquery-2.1.4.min.js?v=26aae2f13dc332df6e6f01e6657a03a0"></script>
+    <script src="/static/lib/pouchdb-nightly.min.js?v=976dac5e7df3437ee5b744bb284a00f8"></script>
+    <script src="/static/lib/bootstrap-3.3.7/js/bootstrap.js?v=fb81549ee2896513a1ed5714b1b1a0f0"></script>
+    <script src="/static/lib/jquery.bootstrapvalidator/bootstrapValidator.js?v=806dd3c8ea2cec8f5468fee749440b76"></script>
+    <script src="/static/lib/d3.v3.js?v=7b37428b3278ad908cb0d70c811b8a2f" charset="UTF-8"></script>
+    <script src="/static/lib/ICanHaz.js?v=636b4fb18f6e30e08927f16d4553a1f6"></script>
+    <script src="/static/lib/base64.js?v=a7125a64994339841ce7b9904e78031b"></script>
+    <link rel="stylesheet" href="/static/css/work-style.css?v=e2d179a998a315411ce5c09521282f61">
+    <script src="/static/lib/jquery.whencallsequentially.js?v=20ec80c2444aac704eda5c3a76aeacf0"></script>
+    <script src="/static/scripts/ContentScript.js?v=f48bf62facfa9aec12e83aa36f9a7ece"></script>
+    <script src="/static/scripts/Config.js?v=f3ed56d6889f598af48082e2d4d89706"></script>
+    <script src="/static/scripts/Selector.js?v=cc989eef548ce3c24183f06bbe875fee"></script>
+    <script src="/static/scripts/SelectorList.js?v=81f622d37e7fb71dfa45001f86b09c28"></script>
+    <script src="/static/scripts/Selector/SelectorDetail.js?v=4dd18fef34d1b20102f6b6abad945d60"></script>
+    <script src="/static/scripts/Selector/SelectorElement.js?v=fb25788cd7ead4146b00a0043f77aa88"></script>
+    <script src="/static/scripts/Selector/SelectorLink.js?v=2bbaeb1b0c5ee45d807edf907c49013a"></script>
+    <script src="/static/scripts/Selector/SelectorPopupLink.js?v=64330929f5e966f13aef693600e5afe7"></script>
+    <script src="/static/scripts/Selector/SelectorGroup.js?v=7876f2d9c2331ce8f0ae0f5b14c843e5"></script>
+    <script src="/static/scripts/Selector/SelectorText.js?v=88faa2ddb3ed07aad280bac85eba8c70"></script>
+    <script src="/static/scripts/Selector/SelectorImage.js?v=afa6260a9f6bb3fe85d7bc279dd1de5f"></script>
+    <script src="/static/scripts/Selector/SelectorHTML.js?v=5326546628e18d59a68a3886815d5aee"></script>
+    <script src="/static/scripts/Selector/SelectorElementAttribute.js?v=f601d8c80492cad7f3dc095d47d14c5e"></script>
+    <script src="/static/scripts/Selector/SelectorTable.js?v=2cc2783c68a2e9af6f1ac1c396a44604"></script>
+    <script src="/static/scripts/Selector/SelectorElementScroll.js?v=d1d84b3b3375ed4721a3f84d8d63ec16"></script>
+    <script src="/static/scripts/Selector/SelectorElementClick.js?v=65d3ed2098993a1230458c80d10b1a69"></script>
+    <script src="/static/scripts/Sitemap.js?v=8e39948e20ae6437894996c13c958e04"></script>
+    <script src="/static/scripts/SelectorGraph.js?v=ef759ccc611bed6dc31d3c2c1985da88"></script>
+    <script src="/static/scripts/SelectorGraphv2.js?v=298343ad022955ae13f6bba4fb6818fe"></script>
+    <script src="/static/scripts/Store.js?v=c0306e1e4bba59a0c2acc9f66ec3d79c"></script>
+    <script src="/static/scripts/StoreDevtools.js?v=b3b2d74a512134879abe1b0c856c3a2e"></script>
+    <script src="/static/scripts/Controller.js?v=cf1bb210876342bf75389370c2835883"></script>
+</head>
+
+<body>
+    <nav class="navbar navbar-default navbar-static-top">
+    <div class="container">
+    <div class="navbar-header">
+    <a class="navbar-brand" href="/">可视化采集平台</a>
+    </div>
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">
+    <li><a class="cursor-pointer" href="/">采集任务</a></li>
+    <li><a class="cursor-pointer" href="/add/config">新增任务</a></li>
+    <li><a class="cursor-pointer" href="/data">查看数据</a></li>
+    <li><a class="cursor-pointer" href="/read">读取配置</a></li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right">
+    <li><a href="/help">Help</a></li>
+    </ul>
+    </div>
+    </div>
+    </nav>
+    <div class="container-fluid">
+        <div class="row">
+            <ol class="breadcrumb">
+                <li><a href="{{ reverse_url('index') }}">采集任务</a></li>
+                <li><a href="{{ reverse_url('config') }}">请求配置</a></li>
+                <li class="active">参数配置</li>
+            </ol>
+            <!-- iframe主体 -->
+            <iframe name="collect" src="https://zhongshan.china.cn/search/fisnfv.shtml"></iframe>
+        </div>
+    </div>
+    <!-- 配置栏 -->
+    <div class="sidebar"></div>
+    <script>
+//        window.CONFIG_DATA = JSON.parse('{% raw config_data %}');
+        $('iframe').css({"width": '100%', "height": "580px"});
+        $(function (){
+            var store = new StoreDevtools();
+            new SitemapController({
+                store: store,
+                templateDir: 'views/'
+            });
+        })
+    </script>
+</body>

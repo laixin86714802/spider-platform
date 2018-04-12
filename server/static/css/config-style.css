@@ -1,0 +1,41 @@
+
+/* 总记录数 */
+.table_operation {
+    min-height: 36px;
+    position: relative;
+}
+
+.table_total {
+    position: absolute;
+    top: 5px;
+    font-size: 16px;
+    color: #77797B;
+    margin-left: 20px;
+}
+
+/* 分页栏 */
+.page {
+    float: right;
+    font-size: 0;
+}
+
+.page span {
+    padding: 4px 10px;
+    display: inline-block;
+    font-size: 14px;
+    border: 1px solid #DDDDDD;
+    border-right: 0;
+    color: #77797B;
+}
+
+.page span.current {
+    color: #000;
+    cursor: pointer;
+    background: #EEEEEE;
+}
+
+.page span:hover {
+    color: #000;
+    cursor: pointer;
+    background: #EEEEEE;
+}

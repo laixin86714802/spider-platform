@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>可视化采集平台</title>
+    <link href="{{ static_url('lib/bootstrap-3.3.7/css/bootstrap.css') }}" rel="stylesheet">
+    <script src="{{ static_url('lib/jquery-2.1.4.min.js') }}"></script>
+    <script src="{{ static_url('lib/bootstrap-3.3.7/js/bootstrap.js') }}"></script>
+    <link href="{{ static_url('favicon.ico') }}" type="image/x-icon" rel="shortcut icon" >
+</head>
+
+<body>
+    <nav class="navbar navbar-default navbar-static-top">
+        <div class="container">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="/">可视化采集平台</a>
+            </div>
+
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li><a class="cursor-pointer" href="{{ reverse_url('index') }}">采集任务</a></li>
+                    <li><a class="cursor-pointer" href="{{ reverse_url('config') }}">新增任务</a></li>
+                    <li><a class="cursor-pointer" href="{{ reverse_url('data') }}">查看数据</a></li>
+                    <li><a class="cursor-pointer" href="{{ reverse_url('read') }}">读取配置</a></li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a id="monitor"></a></li>
+                    <li id="process-stats"></li>
+                    <li><a href="{{ reverse_url('help') }}">Help</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="container">
+        <div id="root"></div>
+    </div>
+
+    <script>
+        window.WS_SERVER_ADDRESS = JSON.parse('{% raw json_encode(reverse_url("ws")) %}');
+        window.START_CRAWL_URL = JSON.parse('{% raw json_encode(reverse_url("start")) %}');
+        window.STOP_CRAWL_URL = JSON.parse('{% raw json_encode(reverse_url("stop")) %}');
+        window.PAUSE_CRAWL_URL = JSON.parse('{% raw json_encode(reverse_url("pause")) %}');
+        window.RESUME_CRAWL_URL = JSON.parse('{% raw json_encode(reverse_url("resume")) %}');
+        window.INITIAL_PROCESS_STATS = JSON.parse('{% raw initial_process_stats_json %}');
+        {% block initial_data %}
+            window.INITIAL_DATA = JSON.parse('{% raw initial_data_json %}');
+        {% end %}
+    </script>
+    <script src="{{ static_url('build/vendor.js') }}"></script>
+    <script src="{{ static_url('build/common.js') }}"></script>
+    <script src="{{ static_url('build/main.js') }}"></script>
+</body>
+</html>

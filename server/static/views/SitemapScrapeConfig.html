@@ -1,0 +1,36 @@
+<div id="scrape-sitemap-config">
+	<form class="form-horizontal" role="form" id="submit-scrape-sitemap-form">
+		<div class="form-group">
+			<label for="requestInterval" class="col-lg-1 control-label">请求间隔 (秒)</label>
+			<div class="col-lg-10">
+				<input type="text" class="form-control" name="requestInterval" id="requestInterval" placeholder="请求间隔">
+			</div>
+		</div>
+		<div class="form-group">
+			<label for="pageLoadDelay" class="col-lg-1 control-label">翻页请求间隔 (秒)</label>
+			<div class="col-lg-10">
+				<input type="text" class="form-control" name="pageLoadDelay" id="pageLoadDelay" placeholder="翻页间隔">
+			</div>
+		</div>
+		<div class="form-group">
+			<label for="sitemapConfig" class="col-lg-1 control-label">任务配置</label>
+			<div class="col-lg-10">
+				<textarea rows="7" class="form-control" name="sitemapConfig" id="sitemapConfig">{{sitemapConfig}}</textarea>
+			</div>
+		</div>
+		<div class="form-group">
+			<label for="sitemapFields" class="col-lg-1 control-label">字段选择器</label>
+			<div class="col-lg-10">
+				<textarea rows="7" class="form-control" name="sitemapFields" id="sitemapFields">{{sitemapJSON}}</textarea>
+			</div>
+		</div>
+		<div class="form-group">
+			<div class="col-lg-offset-1 col-lg-10">
+				<button type="submit" class="btn btn-primary" id="submit-scrape-sitemap">开始任务</button>
+			</div>
+		</div>
+		<div class="alert alert-success col-lg-10 col-lg-offset-1 hide scraping-in-progress" role="alert">
+			程序已开始<br>请在"采集任务"中查看任务状态, 或在"采集数据"中查看数据.
+		</div>
+	</form>
+</div>

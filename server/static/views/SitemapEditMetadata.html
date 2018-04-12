@@ -1,0 +1,46 @@
+<div id="edit-sitemap">
+	<form class="form-horizontal" role="form" id="edit-sitemap-metadata-form">
+		<div class="form-group">
+			<label for="edit_sitemap_id" class="col-lg-1 control-label">网站名称</label>
+
+			<div class="col-lg-10">
+				<input type="text" class="form-control" name="_id" id="edit_sitemap_id" placeholder="Sitemap name" value="{{_id}}">
+			</div>
+		</div>
+		{{#startUrl.push}}
+			{{#startUrl}}
+				<div class="form-group start-url-block">
+					<label class="col-lg-1 control-label">起始url</label>
+					<div class="col-lg-10">
+						<div class="input-group">
+							<input type="text" class="form-control input-start-url" name="startUrl[]" placeholder="URL" value="{{.}}">
+						<span class="input-group-btn">
+							<button class="btn btn-default remove-start-url" type="button">-</button>
+							<button class="btn btn-default add-extra-start-url" type="button">+</button>
+						</span>
+						</div>
+					</div>
+				</div>
+			{{/startUrl}}
+		{{/startUrl.push}}
+		{{^startUrl.push}}
+			<div class="form-group start-url-block">
+				<label class="col-lg-1 control-label">起始url</label>
+				<div class="col-lg-10">
+					<div class="input-group">
+						<input type="text" class="form-control input-start-url" name="startUrl[]" placeholder="URL" value="{{startUrl}}">
+							<span class="input-group-btn">
+								<button class="btn btn-default remove-start-url" type="button">-</button>
+								<button class="btn btn-default add-extra-start-url" type="button">+</button>
+							</span>
+					</div>
+				</div>
+			</div>
+		{{/startUrl.push}}
+		<div class="form-group">
+			<div class="col-lg-offset-1 col-lg-10">
+				<button type="submit" class="btn btn-primary" id="submit-edit-sitemap">保存</button>
+			</div>
+		</div>
+	</form>
+</div>

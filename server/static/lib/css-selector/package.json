@@ -1,0 +1,28 @@
+{
+  "name": "css-selector",
+  "version": "v0.1.0",
+  "description": "Retrieves CSS selector for a given element in DOM.",
+  "homepage": "https://github.com/martinsbalodis/css-selector",
+  "license": "LGPL-3.0+",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/martinsbalodis/css-selector"
+  },
+  "author": {
+    "name": "Martins Balodis",
+    "email": "martins256@gmail.com"
+  },
+  "scripts": {
+    "test": "./node_modules/karma/bin/karma start --browsers Firefox --single-run"
+  },
+  "dependencies": {
+     "jquery": "~2.1.1"
+  },
+  "devDependencies": {
+    "karma-chrome-launcher": "^0.1.4",
+    "karma-firefox-launcher": "~0.1",    
+    "karma-jasmine": "^0.1.5",
+    "karma-requirejs": "^0.2.2",
+    "requirejs": "^2.1.14"
+  }
+}

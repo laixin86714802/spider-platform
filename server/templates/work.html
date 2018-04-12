@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>可视化采集平台</title>
+    <link rel="stylesheet" href="{{ static_url('lib/bootstrap-3.3.7/css/bootstrap.css') }}">
+    <link rel="stylesheet" href="{{ static_url('lib/jquery.bootstrapvalidator/bootstrapValidator.css') }}">
+    <link rel="stylesheet" href="{{ static_url('css/content_script.css') }}">
+    <link href="{{ static_url('favicon.ico') }}" type="image/x-icon" rel="shortcut icon" >
+    <script src="{{ static_url('lib/jquery-2.1.4.min.js') }}"></script>
+    <script src="{{ static_url('lib/pouchdb-nightly.min.js') }}"></script>
+    <script src="{{ static_url('lib/bootstrap-3.3.7/js/bootstrap.js') }}"></script>
+    <script src="{{ static_url('lib/jquery.bootstrapvalidator/bootstrapValidator.js') }}"></script>
+    <script src="{{ static_url('lib/d3.v3.js') }}" charset="UTF-8"></script>
+    <script src="{{ static_url('lib/ICanHaz.js') }}"></script>
+    <script src="{{ static_url('lib/base64.js') }}"></script>
+    <link rel="stylesheet" href="{{ static_url('css/work-style.css') }}">
+
+    <script src="{{ static_url('lib/jquery.whencallsequentially.js') }}"></script>
+    <script src="{{ static_url('scripts/ContentScript.js') }}"></script>
+    <script src="{{ static_url('scripts/Config.js') }}"></script>
+    <script src="{{ static_url('scripts/Selector.js') }}"></script>
+    <script src="{{ static_url('scripts/SelectorList.js') }}"></script>
+    <script src="{{ static_url('scripts/Selector/SelectorDetail.js') }}"></script>
+    <script src="{{ static_url('scripts/Selector/SelectorElement.js') }}"></script>
+    <script src="{{ static_url('scripts/Selector/SelectorLink.js') }}"></script>
+    <script src="{{ static_url('scripts/Selector/SelectorPopupLink.js') }}"></script>
+    <script src="{{ static_url('scripts/Selector/SelectorGroup.js') }}"></script>
+    <script src="{{ static_url('scripts/Selector/SelectorText.js') }}"></script>
+    <script src="{{ static_url('scripts/Selector/SelectorImage.js') }}"></script>
+    <script src="{{ static_url('scripts/Selector/SelectorHTML.js') }}"></script>
+    <script src="{{ static_url('scripts/Selector/SelectorElementAttribute.js') }}"></script>
+    <script src="{{ static_url('scripts/Selector/SelectorTable.js') }}"></script>
+    <script src="{{ static_url('scripts/Selector/SelectorElementScroll.js') }}"></script>
+    <script src="{{ static_url('scripts/Selector/SelectorElementClick.js') }}"></script>
+    <script src="{{ static_url('scripts/Sitemap.js') }}"></script>
+    <script src="{{ static_url('scripts/SelectorGraph.js') }}"></script>
+    <script src="{{ static_url('scripts/SelectorGraphv2.js') }}"></script>
+    <script src="{{ static_url('scripts/Store.js') }}"></script>
+    <script src="{{ static_url('scripts/StoreDevtools.js') }}"></script>
+    <script src="{{ static_url('scripts/Controller.js') }}"></script>
+</head>
+
+<body>
+    {% include "base.html" %}
+    <div class="container-fluid">
+        <div class="row">
+            <ol class="breadcrumb">
+                <li><a href="{{ reverse_url('index') }}">采集任务</a></li>
+                <li><a href="{{ reverse_url('config') }}">请求配置</a></li>
+                <li class="active">参数配置</li>
+            </ol>
+            <!-- iframe主体 -->
+            <iframe name="collect" src="{{ static_url('spider/start.html') }}"></iframe>
+        </div>
+    </div>
+    <!-- 配置栏 -->
+    <div class="sidebar"></div>
+    <script>
+        window.CONFIG_DATA = JSON.parse('{% raw config_data %}');
+        $('iframe').css({"width": '100%', "height": "580px"});
+        $(function (){
+            var store = new StoreDevtools();
+            new SitemapController({
+                store: store,
+                templateDir: 'views/'
+            });
+        })
+    </script>
+</body>

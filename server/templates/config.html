@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>可视化采集平台</title>
+    <link href="{{ static_url('lib/bootstrap-3.3.7/css/bootstrap.css') }}" rel="stylesheet">
+    <script src="{{ static_url('lib/jquery-2.1.4.min.js') }}"></script>
+    <script src="{{ static_url('lib/bootstrap-3.3.7/js/bootstrap.js') }}"></script>
+    <link href="{{ static_url('favicon.ico') }}" type="image/x-icon" rel="shortcut icon" >
+    <link href="{{ static_url('css/base.css') }}" rel="stylesheet">
+    <script src="{{ static_url('js/config.js') }}"></script>
+    <link href="{{ static_url('css/config-style.css') }}" rel="stylesheet">
+</head>
+
+<body>
+    <!-- 表单警告框 -->
+    <div id="head_warn" class="alert alert-danger" role="alert" style="display:none">
+        <strong>警告！</strong>head表单中存在空值。</div>
+    <div id="form_warn" class="alert alert-danger" role="alert" style="display:none">
+        <strong>警告！</strong>form表单中存在空值。</div>
+    <div id="cookie_warn" class="alert alert-danger" role="alert" style="display:none">
+        <strong>警告！</strong>cookie表单中存在空值。</div>
+    <!-- 导航栏 -->
+    {% include "base.html" %}
+    <div class="container">
+        <div class="row">
+            <ol class="breadcrumb">
+                <li><a href="{{ reverse_url('index') }}">采集任务</a></li>
+                <li class="active">请求配置</li>
+            </ol>
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a data-toggle="collapse" href="#task-list">请求参数配置</a></h4>
+                </div>
+                <div id="task-list" class="panel-collapse collapse in">
+                    <div class="panel-body">
+                        <!-- 配置名称 -->
+                        <div class="input-group">
+                            <span class="input-group-addon">请输入配置名称</span>
+                            <input type="text" class="form-control" id="conf_name" placeholder="配置名称">
+                            <p style="color: #F66495; display: none" id="name_warn">配置名称为空</p></div>
+                        <br>
+                        <!-- URL -->
+                        <div class="input-group">
+                            <span class="input-group-addon">请输入URL&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                            <select class="form-control" id="mode">
+                                <option value="get">GET请求</option>
+                                <option value="post">POST请求</option></select>
+                            <input type="text" class="form-control" id="url" placeholder="例：https://www.baidu.com/">
+                            <p style="color: #F66495; display: none" id="url_warn">url不合法</p></div>
+                        <br>
+                        <!-- 参数 -->
+                        <div class="input-group">
+                            <span class="input-group-addon">请求参数&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                            <ul class="nav nav-tabs">
+                                <li class="active" id="header">
+                                    <a href="#" onclick="selectHeader()">headers参数</a></li>
+                                <li id="cookie">
+                                    <a href="#" onclick="selectCookie()">cookies参数</a></li>
+                                <li id="form">
+                                    <a href="#" onclick="selectForm()" style="visibility:hidden">form-data参数</a></li>
+                            </ul>
+                            <!-- header参数 -->
+                            <div id="header-table" style="display:inline" class="row col-xs-8 col-sm-8 col-md-8">
+                                <table id="table_header" class="table table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>Header Key</th>
+                                            <th>Header Value</th></tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr id="header_1">
+                                            <td>
+                                                <input type="text" class="form-control" placeholder="New key"></td>
+                                            <td>
+                                                <input type="text" class="form-control" placeholder="New Value"></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <!-- 新增参数 -->
+                                <div class="row container-fluid">
+                                    <button type="button" class="btn btn-default pull-left" onclick="addHeaderRow()">
+                                        <span class="glyphicon glyphicon-plus"></span>
+                                    </button>
+                                </div>
+                            </div>
+                            <!-- cookie参数 -->
+                            <div id="cookie-table" style="display:none" class="row col-xs-8 col-sm-8 col-md-8">
+                                <table id="table_cookie" class="table table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>Cookie Key</th>
+                                            <th>Cookie Value</th></tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr id="cookie_1">
+                                            <td>
+                                                <input type="text" class="form-control" placeholder="New key"></td>
+                                            <td>
+                                                <input type="text" class="form-control" placeholder="New Value"></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <!-- 新增参数 -->
+                                <div class="row container-fluid">
+                                    <button type="button" class="btn btn-default pull-left" onclick="addCookieRow()">
+                                        <span class="glyphicon glyphicon-plus"></span>
+                                    </button>
+                                </div>
+                            </div>
+                            <!-- post请求 form参数 -->
+                            <div id="form-table" style="display:none" class="row col-xs-8 col-sm-8 col-md-8">
+                                <table id="table_form" class="table table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>Form Key</th>
+                                            <th>Form Value</th></tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr id="form_1">
+                                            <td>
+                                                <input type="text" class="form-control" placeholder="New key"></td>
+                                            <td>
+                                                <input type="text" class="form-control" placeholder="New Value"></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <!-- 新增参数 -->
+                                <div class="row container-fluid">
+                                    <button type="button" class="btn btn-default pull-left" onclick="addFormRow()">
+                                        <span class="glyphicon glyphicon-plus"></span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <br>
+                        <!-- 代理IP -->
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                <input type="checkbox" id="proxy"></span>
+                            <p class="form-control">是否启用代理IP</p></div>
+                        <br>
+                        <!-- 动态加载 -->
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                <input type="checkbox" id="dynamic"></span>
+                            <p class="form-control">是否启用动态加载JS</p></div>
+                    </div>
+                    <!-- 模态框模板_无状态 -->
+                    <div class="modal fade" id="modal_model" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                    <!-- 写入标题 -->
+                                    <h4 class="modal-title" id="myModalLabel"></h4>
+                                </div>
+                                <!-- 写入内容 -->
+                                <div class="modal-body" id="modal_model_body"></div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                                    <button type="button" class="btn btn-primary" data-dismiss="modal">确定</button></div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- 模态框_确认 -->
+                    <input type="hidden" id="common_confirm_btn" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#common_confirm_model">
+                    <div id="common_confirm_model" class="modal">
+                        <div class="modal-dialog modal-sm">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal">
+                                        <span aria-hidden="true">&times;</span>
+                                        <span class="sr-only">Close</span></button>
+                                    <h5 class="modal-title">
+                                        <i class="fa fa-exclamation-circle"></i>
+                                        <span class="title"></span>
+                                    </h5>
+                                </div>
+                                <div class="modal-body small">
+                                    <p>
+                                        <span class="message"></span>
+                                    </p>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-primary ok" data-dismiss="modal">确认</button>
+                                    <button type="button" class="btn btn-default cancel" data-dismiss="modal">取消</button></div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- 保存配置模态框 -->
+                    <div class="modal fade" id="myModal" data-backdrop="false" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="bg-primary modal-header">
+                                    <!-- 关闭 -->
+                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                    <h4>请求配置</h4>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="row">
+                                        <label class="col-xs-5 col-sm-5 col-md-5">配置名称:</label>
+                                        <div class="col-xs-5 col-sm-5 col-md-5">
+                                            <p id="modal_name"></p>
+                                        </div>
+                                    </div>
+                                    <hr>
+                                    <div class="row">
+                                        <label class="col-xs-5 col-sm-5 col-md-5">请求方式:</label>
+                                        <div class="col-xs-5 col-sm-5 col-md-5">
+                                            <p id="modal_method"></p>
+                                        </div>
+                                    </div>
+                                    <hr>
+                                    <div class="row">
+                                        <label class="col-xs-5 col-sm-5 col-md-5">URL:</label>
+                                        <div class="col-xs-5 col-sm-5 col-md-5">
+                                            <p id="modal_url"></p>
+                                        </div>
+                                    </div>
+                                    <hr>
+                                    <div class="row">
+                                        <label class="col-xs-5 col-sm-5 col-md-5">启用代理IP:</label>
+                                        <div class="col-xs-5 col-sm-5 col-md-5">
+                                            <p id="model_proxy"></p>
+                                        </div>
+                                    </div>
+                                    <hr>
+                                    <div class="row">
+                                        <label class="col-xs-5 col-sm-5 col-md-5">动态加载JS:</label>
+                                        <div class="col-xs-5 col-sm-5 col-md-5">
+                                            <p id="model_dynamic"></p>
+                                        </div>
+                                    </div>
+                                    <hr>
+                                    <div class="row">
+                                        <label class="col-xs-5 col-sm-5 col-md-5">header参数:</label>
+                                        <div class="col-xs-5 col-sm-5 col-md-5">
+                                            <p id="modal_header"></p>
+                                        </div>
+                                    </div>
+                                    <hr>
+                                    <div class="row">
+                                        <label class="col-xs-5 col-sm-5 col-md-5">cookie参数:</label>
+                                        <div class="col-xs-5 col-sm-5 col-md-5">
+                                            <p id="modal_cookie"></p>
+                                        </div>
+                                    </div>
+                                    <hr>
+                                    <div class="row">
+                                        <label class="col-xs-5 col-sm-5 col-md-5">form参数:</label>
+                                        <div class="col-xs-5 col-sm-5 col-md-5">
+                                            <p id="modal_form"></p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                                    <button type="button" class="btn btn-primary" onclick="sendReqData()">确定</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- 显示结果页 -->
+            <div class="row">
+                <div class="btn-group container-fluid">
+                    <button type="button" class="btn btn-default" onclick="saveConfigForm()">下一步</button>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

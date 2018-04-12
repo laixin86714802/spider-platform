@@ -1,0 +1,19 @@
+<nav class="navbar navbar-default navbar-static-top">
+    <div class="container">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="/">可视化采集平台</a>
+        </div>
+
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+                <li><a class="cursor-pointer" href="{{ reverse_url('index') }}">采集任务</a></li>
+                <li><a class="cursor-pointer" href="{{ reverse_url('config') }}">新增任务</a></li>
+                <li><a class="cursor-pointer" href="{{ reverse_url('data') }}">查看数据</a></li>
+                <li><a class="cursor-pointer" href="{{ reverse_url('read') }}">读取配置</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="{{ reverse_url('help') }}">Help</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>

@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>可视化采集平台</title>
+    <link href="/static/css/base/bootstrap.min.css?v=6af1885cfeca34a0aacae8e8d4922ea2" rel="stylesheet">
+    <script src="/static/js/base/jquery-2.1.4.min.js?v=26aae2f13dc332df6e6f01e6657a03a0"></script>
+    <script src="/static/js/base/bootstrap.min.js?v=04c84852e9937b142ac73c285b895b85"></script>
+    <link href="/static/favicon.ico?v=0914c70810cc0be6f370651104d73aa8" type="image/x-icon" rel="shortcut icon">
+    <link href="/static/css/base.css?v=78a02d47baba7cef2cebe3f27d15c0e8" rel="stylesheet">
+        <script src="/static/js/work.js"></script>
+    <link href="/static/css/work-style.css" rel="stylesheet">
+</head>
+
+<body>
+    <nav class="navbar navbar-default navbar-static-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="/">Tornado-Scrapy</a>
+            </div>
+
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li><a class="cursor-pointer" href="/">采集任务</a></li>
+                    <li><a class="cursor-pointer" href="/add/config">新增任务</a></li>
+                    <li><a class="cursor-pointer" href="/data">采集数据</a></li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a id="arachnado-connection-monitor"></a></li>
+                    <li id="arachnado-process-stats"></li>
+                    <li><a href="{{ reverse_url('help') }}">Help</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="container">
+        <div class="row">
+            <ol class="breadcrumb">
+                <li><a href="/">采集任务</a></li>
+                <li><a href="/add/config">请求配置</a></li>
+                <li class="active">参数配置</li>
+            </ol>
+            <!-- iframe主体 -->
+            <iframe name="collect" src="/static/spider/start.html"></iframe>
+        </div>
+    </div>
+    <!-- 配置栏 -->
+    <div class="sidebar">
+        <!-- 自由拖动 -->
+        <div class="expander"></div>
+        <!-- 面包屑导航 -->
+        <ol class="breadcrumb">
+            <li><a href="#">_root</a></li>
+        </ol>
+        <table class="table table-bordered table-condensed">
+            <thead>
+                <tr>
+                    <th>名称</th>
+                    <th>选择器</th>
+                    <th>类型</th>
+                    <th>是否选择列</th>
+                    <th>父容器</th>
+                    <th>选项</th>
+                </tr>
+            </thead>
+            <tbody id="save-sel">
+            </tbody>
+        </table>
+        <button type="button" class="btn btn-info btn-xs" onclick="iframe_mouse_event()">新增选择器</button>
+    </div>
+    <!-- 浮动框 -->
+    <div class="float-frame">
+        <div class="show-element">
+            <div>
+                <span id="path"></span>
+                <button class="glyphicon glyphicon-arrow-right button" id="button-position"></button>
+            </div>
+            <div class="attribute" id="attr">
+                <span>content: </span>
+                <span></span>
+            </div>
+        </div>
+    </div>
+    <!-- 弹窗 -->
+    <div class="select-view">
+        <div class="row-float row">
+            <button type="button" class="btn-custom btn-close">
+                <span class="glyphicon glyphicon-off"></span>
+            </button>
+        </div>
+        <div class="row-float">
+            <form class="form-horizontal">
+                <fieldset>
+                    <div class="form-group">
+                        <label for="select-name" class="col-lg-2 control-label">字段名称</label>
+                        <div class="col-lg-10">
+                            <input type="text" class="form-control" value="" id="select-name" data-container="body" data-toggle="popover" data-content="名称不为空" data-placement="bottom" data-trigger="manual" data-off="">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="select-form" class="col-lg-2 control-label">attr</label>
+                        <div class="col-lg-10">
+                            <select class="form-control" id="select-form"></select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="select-value" class="col-lg-2 control-label">value</label>
+                        <div class="col-lg-10">
+                            <p id="select-value"></p>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="select-input" class="col-lg-2 control-label">css选择器</label>
+                        <div class="col-lg-10">
+                            <input type="text" class="form-control" value="" id="select-input">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="multiple" class="col-lg-2 control-label">列表多选</label>
+                        <div class="col-lg-10">
+                            <input type="checkbox" id="multiple">
+                        </div>
+                    </div>
+                </fieldset>
+            </form>
+        </div>
+        <div class="row-float">
+            <button type="button" class="btn-done" onclick="save_select()"><span class="glyphicon glyphicon-ok"></span>确定</button>
+        </div>
+    </div>
+</body>

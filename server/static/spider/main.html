@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="/static/lib/bootstrap-3.3.7/css/bootstrap.css">
+    <link rel="stylesheet" href="/static/lib/jquery.bootstrapvalidator/bootstrapValidator.css">
+    <link rel="stylesheet" href="/static/css/devtools_scraper_panel.css">
+    <link rel="stylesheet" href="/static/css/content_script.css">
+    <script src="/static/lib/jquery-2.1.4.min.js"></script>
+    <script src="/static/lib/pouchdb-nightly.min.js"></script>
+    <script src="/static/lib/bootstrap-3.3.7/js/bootstrap.js"></script>
+    <script src="/static/lib/jquery.bootstrapvalidator/bootstrapValidator.js"></script>
+    <script src="/static/lib/d3.v3.js" charset="UTF-8"></script>
+    <script src="/static/lib/ICanHaz.js"></script>
+
+	<script src="/static/scripts/BackgroundScript.js"></script>
+    <script src="/static/scripts/ContentScript.js"></script>
+    <script src="/static/scripts/ContentSelector.js"></script>
+    <script src="/static/lib/css-selector/lib/CssSelector.js"></script>
+	<script src="/static/scripts/Config.js"></script>
+	<script src="/static/scripts/Selector.js"></script>
+	<script src="/static/scripts/SelectorList.js"></script>
+	<script src="/static/scripts/Selector/SelectorElement.js"></script>
+	<script src="/static/scripts/Selector/SelectorLink.js"></script>
+	<script src="/static/scripts/Selector/SelectorPopupLink.js"></script>
+	<script src="/static/scripts/Selector/SelectorGroup.js"></script>
+	<script src="/static/scripts/Selector/SelectorText.js"></script>
+	<script src="/static/scripts/Selector/SelectorImage.js"></script>
+	<script src="/static/scripts/Selector/SelectorHTML.js"></script>
+	<script src="/static/scripts/Selector/SelectorElementAttribute.js"></script>
+	<script src="/static/scripts/Selector/SelectorTable.js"></script>
+	<script src="/static/scripts/Selector/SelectorElementScroll.js"></script>
+	<script src="/static/scripts/Selector/SelectorElementClick.js"></script>
+	<script src="/static/scripts/Sitemap.js"></script>
+	<script src="/static/scripts/SelectorGraph.js"></script>
+	<script src="/static/scripts/SelectorGraphv2.js"></script>
+	<script src="/static/scripts/Store.js"></script>
+	<script src="/static/scripts/StoreDevtools.js"></script>
+	<script src="/static/scripts/Controller.js"></script>
+</head>
+
+<body>
+<div class="sidebar"></div>
+<script>
+	$(function (){
+		var store = new StoreDevtools();
+		new SitemapController({
+			store: store,
+			templateDir: 'views/'
+		})
+	})
+</script>
+</body>
