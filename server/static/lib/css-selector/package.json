@@ -16,7 +16,7 @@
     "test": "./node_modules/karma/bin/karma start --browsers Firefox --single-run"
   },
   "dependencies": {
-     "jquery": "~2.1.1"
+     "jquery": "~3.5.0"
   },
   "devDependencies": {
     "karma-chrome-launcher": "^0.1.4",
