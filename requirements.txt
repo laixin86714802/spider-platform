@@ -21,7 +21,7 @@ pycparser==2.18
 PyDispatcher==2.0.5
 pymongo==3.6.0
 pyOpenSSL==17.5.0
-pywin32==221
+pywin32==301
 queuelib==1.4.2
 requests==2.18.4
 Scrapy==1.4.0
