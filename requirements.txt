@@ -12,7 +12,7 @@ cssselect==1.0.1
 hyperlink==17.3.1
 idna==2.6
 incremental==17.5.0
-lxml==4.1.1
+lxml==4.9.1
 parsel==1.2.0
 psutil==5.4.2
 pyasn1==0.4.2
